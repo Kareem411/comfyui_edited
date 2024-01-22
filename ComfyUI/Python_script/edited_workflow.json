@@ -1,0 +1,815 @@
+{
+  "3": {
+    "inputs": {
+      "seed": 10016113,
+      "steps": 6,
+      "cfg": 1.5,
+      "sampler_name": "lcm",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "146",
+        0
+      ],
+      "positive": [
+        "25",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "155",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "4": {
+    "inputs": {
+      "ckpt_name": "divineanimemix_V2.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "6": {
+    "inputs": {
+      "text": "1girl, with name of Jennie Kim, solo, Korean, , closed mouth, aroused, black hair, black eyes, see through, sweating, dress, stockings, legs, earrings, gradient background, grey background, jewelry, long hair, huge breasts, hanging breasts, necklace, <lora:koreanDollLikeness:0.6>",
+      "clip": [
+        "146",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text": "text, watermark",
+      "clip": [
+        "23",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "3",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "10": {
+    "inputs": {
+      "ipadapter_file": "ip-adapter-full-face_sd15.bin"
+    },
+    "class_type": "IPAdapterModelLoader",
+    "_meta": {
+      "title": "Load IPAdapter Model"
+    }
+  },
+  "11": {
+    "inputs": {
+      "weight": 0.75,
+      "noise": 0.01,
+      "weight_type": "original",
+      "start_at": 0,
+      "end_at": 0.85,
+      "unfold_batch": false,
+      "ipadapter": [
+        "10",
+        0
+      ],
+      "clip_vision": [
+        "12",
+        0
+      ],
+      "image": [
+        "13",
+        0
+      ],
+      "model": [
+        "144",
+        0
+      ]
+    },
+    "class_type": "IPAdapterApply",
+    "_meta": {
+      "title": "Apply IPAdapter"
+    }
+  },
+  "12": {
+    "inputs": {
+      "clip_name": "SD1.5\\model.safetensors"
+    },
+    "class_type": "CLIPVisionLoader",
+    "_meta": {
+      "title": "Load CLIP Vision"
+    }
+  },
+  "13": {
+    "inputs": {
+      "image": "ipadapter (2).png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "14": {
+    "inputs": {
+      "image": "input (2).png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "15": {
+    "inputs": {
+      "pixels": [
+        "14",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "16": {
+    "inputs": {
+      "strength": 1,
+      "conditioning": [
+        "6",
+        0
+      ],
+      "control_net": [
+        "17",
+        0
+      ],
+      "image": [
+        "91",
+        0
+      ]
+    },
+    "class_type": "ControlNetApply",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "17": {
+    "inputs": {
+      "control_net_name": "control_v11p_sd15_lineart.pth"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "23": {
+    "inputs": {
+      "lora_name": "koreanDollLikeness.safetensors",
+      "strength_model": 0.63,
+      "strength_clip": 0.6,
+      "model": [
+        "4",
+        0
+      ],
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "25": {
+    "inputs": {
+      "strength": 1,
+      "conditioning": [
+        "16",
+        0
+      ],
+      "control_net": [
+        "26",
+        0
+      ],
+      "image": [
+        "71",
+        0
+      ]
+    },
+    "class_type": "ControlNetApply",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "26": {
+    "inputs": {
+      "control_net_name": "control_v11p_sd15_scribble.pth"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "35": {
+    "inputs": {
+      "model": "CIDAS/clipseg-rd64-refined"
+    },
+    "class_type": "CLIPSeg Model Loader",
+    "_meta": {
+      "title": "CLIPSeg Model Loader"
+    }
+  },
+  "37": {
+    "inputs": {
+      "low_threshold": 250,
+      "high_threshold": 150,
+      "blur_radius": 2,
+      "image": [
+        "41",
+        1
+      ]
+    },
+    "class_type": "ImageToContrastMask",
+    "_meta": {
+      "title": "ImageToContrastMask"
+    }
+  },
+  "38": {
+    "inputs": {
+      "mask": [
+        "37",
+        1
+      ]
+    },
+    "class_type": "InvertMask",
+    "_meta": {
+      "title": "InvertMask"
+    }
+  },
+  "39": {
+    "inputs": {
+      "padding": 24,
+      "region_type": "dominant",
+      "mask": [
+        "38",
+        0
+      ]
+    },
+    "class_type": "Mask Crop Region",
+    "_meta": {
+      "title": "Mask Crop Region"
+    }
+  },
+  "40": {
+    "inputs": {
+      "top": [
+        "39",
+        2
+      ],
+      "left": [
+        "39",
+        3
+      ],
+      "right": [
+        "39",
+        4
+      ],
+      "bottom": [
+        "39",
+        5
+      ],
+      "image": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "Image Crop Location",
+    "_meta": {
+      "title": "Image Crop Location"
+    }
+  },
+  "41": {
+    "inputs": {
+      "text": [
+        "42",
+        0
+      ],
+      "image": [
+        "8",
+        0
+      ],
+      "clipseg_model": [
+        "35",
+        0
+      ]
+    },
+    "class_type": "CLIPSeg Masking",
+    "_meta": {
+      "title": "CLIPSeg Masking"
+    }
+  },
+  "42": {
+    "inputs": {
+      "Text": "Face"
+    },
+    "class_type": "Text",
+    "_meta": {
+      "title": "Search Text"
+    }
+  },
+  "47": {
+    "inputs": {
+      "expand": 12,
+      "tapered_corners": true,
+      "mask": [
+        "39",
+        0
+      ]
+    },
+    "class_type": "GrowMask",
+    "_meta": {
+      "title": "GrowMask"
+    }
+  },
+  "48": {
+    "inputs": {
+      "mask": [
+        "47",
+        0
+      ]
+    },
+    "class_type": "MaskToImage",
+    "_meta": {
+      "title": "Convert Mask to Image"
+    }
+  },
+  "49": {
+    "inputs": {
+      "radius": 15,
+      "sigma_factor": 1.01,
+      "image": [
+        "50",
+        0
+      ]
+    },
+    "class_type": "Blur",
+    "_meta": {
+      "title": "Blur"
+    }
+  },
+  "50": {
+    "inputs": {
+      "distance": 5,
+      "op": "open",
+      "image": [
+        "48",
+        0
+      ]
+    },
+    "class_type": "Mask Morphology",
+    "_meta": {
+      "title": "Mask Morphology"
+    }
+  },
+  "51": {
+    "inputs": {
+      "method": "intensity",
+      "image": [
+        "49",
+        0
+      ]
+    },
+    "class_type": "Image To Mask",
+    "_meta": {
+      "title": "Image To Mask"
+    }
+  },
+  "58": {
+    "inputs": {
+      "seed": 10016113,
+      "steps": 5,
+      "cfg": 1.5,
+      "sampler_name": "lcm",
+      "scheduler": "karras",
+      "denoise": 0.55,
+      "model": [
+        "11",
+        0
+      ],
+      "positive": [
+        "76",
+        0
+      ],
+      "negative": [
+        "63",
+        0
+      ],
+      "latent_image": [
+        "67",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "Redraw sampler"
+    }
+  },
+  "61": {
+    "inputs": {
+      "strength": 1,
+      "conditioning": [
+        "108",
+        0
+      ],
+      "control_net": [
+        "65",
+        0
+      ],
+      "image": [
+        "127",
+        0
+      ]
+    },
+    "class_type": "ControlNetApply",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "62": {
+    "inputs": {
+      "text": "face shot, close shot, 1girl, with name of Jennie Kim, solo, Korean,closed mouth, aroused, black hair, black eyes, earrings, gradient background, grey background, jewelry, long hair, necklace, <lora:koreanDollLikeness:0.6>",
+      "clip": [
+        "144",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "clip text for face redraw (Prompt)"
+    }
+  },
+  "63": {
+    "inputs": {
+      "text": "text, watermark",
+      "clip": [
+        "144",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "64": {
+    "inputs": {
+      "samples": [
+        "58",
+        0
+      ],
+      "vae": [
+        "89",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "65": {
+    "inputs": {
+      "control_net_name": "control_v11p_sd15_lineart.pth"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "67": {
+    "inputs": {
+      "pixels": [
+        "40",
+        0
+      ],
+      "vae": [
+        "89",
+        2
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "71": {
+    "inputs": {
+      "a": 6.283185307179586,
+      "bg_threshold": 0.1,
+      "resolution": 512,
+      "image": [
+        "14",
+        0
+      ]
+    },
+    "class_type": "MiDaS-DepthMapPreprocessor",
+    "_meta": {
+      "title": "MiDaS Depth Map"
+    }
+  },
+  "76": {
+    "inputs": {
+      "strength": 1,
+      "conditioning": [
+        "61",
+        0
+      ],
+      "control_net": [
+        "78",
+        0
+      ],
+      "image": [
+        "149",
+        0
+      ]
+    },
+    "class_type": "ControlNetApply",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "78": {
+    "inputs": {
+      "control_net_name": "control_v11f1p_sd15_depth.pth"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "89": {
+    "inputs": {
+      "ckpt_name": "divineelegancemix_V8.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "90": {
+    "inputs": {
+      "lora_name": "koreanDollLikeness.safetensors",
+      "strength_model": 0.62,
+      "strength_clip": 1,
+      "model": [
+        "89",
+        0
+      ],
+      "clip": [
+        "89",
+        1
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "91": {
+    "inputs": {
+      "coarse": "disable",
+      "resolution": 512,
+      "image": [
+        "14",
+        0
+      ]
+    },
+    "class_type": "LineArtPreprocessor",
+    "_meta": {
+      "title": "Realistic Lineart"
+    }
+  },
+  "108": {
+    "inputs": {
+      "strength": 1,
+      "conditioning": [
+        "62",
+        0
+      ],
+      "control_net": [
+        "109",
+        0
+      ],
+      "image": [
+        "110",
+        0
+      ]
+    },
+    "class_type": "ControlNetApply",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "109": {
+    "inputs": {
+      "control_net_name": "control_v2p_sd15_mediapipe_face.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "110": {
+    "inputs": {
+      "max_faces": 1,
+      "min_confidence": 0.5,
+      "resolution": 512,
+      "image": [
+        "40",
+        0
+      ]
+    },
+    "class_type": "MediaPipe-FaceMeshPreprocessor",
+    "_meta": {
+      "title": "MediaPipe Face Mesh"
+    }
+  },
+  "114": {
+    "inputs": {
+      "x": [
+        "39",
+        3
+      ],
+      "y": [
+        "39",
+        2
+      ],
+      "resize_source": false,
+      "destination": [
+        "8",
+        0
+      ],
+      "source": [
+        "64",
+        0
+      ],
+      "mask": [
+        "51",
+        0
+      ]
+    },
+    "class_type": "ImageCompositeMasked",
+    "_meta": {
+      "title": "ImageCompositeMasked"
+    }
+  },
+  "115": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "114",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "116": {
+    "inputs": {
+      "model_name": "4x_fatal_Anime_500000_G.pth"
+    },
+    "class_type": "UpscaleModelLoader",
+    "_meta": {
+      "title": "Load Upscale Model"
+    }
+  },
+  "127": {
+    "inputs": {
+      "coarse": "disable",
+      "resolution": 512,
+      "image": [
+        "40",
+        0
+      ]
+    },
+    "class_type": "LineArtPreprocessor",
+    "_meta": {
+      "title": "Realistic Lineart"
+    }
+  },
+  "144": {
+    "inputs": {
+      "lora_name": "LCM_LoRA_Weights_SD15.safetensors",
+      "strength_model": 1,
+      "strength_clip": 1,
+      "model": [
+        "90",
+        0
+      ],
+      "clip": [
+        "90",
+        1
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "146": {
+    "inputs": {
+      "lora_name": "LCM_LoRA_Weights_SD15.safetensors",
+      "strength_model": 1,
+      "strength_clip": 1,
+      "model": [
+        "23",
+        0
+      ],
+      "clip": [
+        "23",
+        1
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "149": {
+    "inputs": {
+      "resolution": 960,
+      "image": [
+        "40",
+        0
+      ]
+    },
+    "class_type": "Zoe-DepthMapPreprocessor",
+    "_meta": {
+      "title": "Zoe Depth Map"
+    }
+  },
+  "153": {
+    "inputs": {
+      "image": [
+        "14",
+        0
+      ]
+    },
+    "class_type": "GetImageSize",
+    "_meta": {
+      "title": "GetImageSize"
+    }
+  },
+  "155": {
+    "inputs": {
+      "width": [
+        "153",
+        0
+      ],
+      "height": [
+        "153",
+        1
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  }
+}
